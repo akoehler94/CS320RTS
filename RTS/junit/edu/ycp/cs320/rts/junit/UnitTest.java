@@ -40,8 +40,9 @@ public class UnitTest {
 		assertEquals(waypoint1.getX(), u1.getNextWaypoint().getX());
 		assertEquals(waypoint1.getY(), u1.getNextWaypoint().getY());
 		u1.addWaypoint(waypoint2);
-		//assertEquals(waypoint2.getX(), u1.getNextWaypoint().getX());
-		//assertEquals(waypoint2.getY(), u1.getNextWaypoint().getY());
+		u1.removeWaypoint();
+		assertEquals(waypoint2.getX(), u1.getNextWaypoint().getX());
+		assertEquals(waypoint2.getY(), u1.getNextWaypoint().getY());
 	}
 	
 	@Test
@@ -51,17 +52,17 @@ public class UnitTest {
 		u1.addWaypoint(waypoint1);
 		u1.addWaypoint(waypoint2);
 		u1.removeWaypoint();
-		assertEquals(waypoint1.getX(), u1.getNextWaypoint().getX());
-		assertEquals(waypoint1.getY(), u1.getNextWaypoint().getY());
+		assertEquals(waypoint2.getX(), u1.getNextWaypoint().getX());
+		assertEquals(waypoint2.getY(), u1.getNextWaypoint().getY());
 		
 	}
 	
 	@Test
 	public void testClearWaypoints() {
 		Point waypoint1 = new Point(10,0);
-		//Point waypoint2 = new Point(10,10);
+		Point waypoint2 = new Point(10,10);
 		u1.addWaypoint(waypoint1);
-		//u1.addWaypoint(waypoint2);
+		u1.addWaypoint(waypoint2);
 		u1.clearWaypoints();
 		assertEquals(null, u1.getNextWaypoint());
 		
