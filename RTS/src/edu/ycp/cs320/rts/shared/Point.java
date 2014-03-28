@@ -8,7 +8,7 @@ package edu.ycp.cs320.rts.shared;
  *
  * Mar 13, 2014
  */
-public class Point {
+public class Point implements Comparable<Point>{
 	private int x;
 	private int y;
 	
@@ -76,6 +76,16 @@ public class Point {
 		int dy = this.y - p.getY();
 		
 		return (int) Math.sqrt((dx*dx)+(dy*dy));
+	}
+
+	@Override
+	public int compareTo(Point o) {
+		int x = o.getX() - this.getX();
+		int y = o.getY() - this.getY();
+		if(x==0 && y==0){
+			return 0;
+		}
+		return x+y;
 	}
 
 }

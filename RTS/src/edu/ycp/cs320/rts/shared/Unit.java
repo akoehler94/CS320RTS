@@ -1,6 +1,7 @@
 package edu.ycp.cs320.rts.shared;
 
 
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -12,7 +13,7 @@ public class Unit extends Interactable implements Movable, Attackable {
 	// Constructor
 	public Unit() {
 		super();
-		waypoints = new PriorityQueue<Point>();
+		waypoints = new LinkedList<Point>();
 		speed =1;
 	}
 	
@@ -28,7 +29,7 @@ public class Unit extends Interactable implements Movable, Attackable {
 	 */
 	public Unit(int id, int owner, Point size, Point pos, int health, int speed, int def) {
 		super(id, owner, size, pos, def, health);
-		waypoints = new PriorityQueue<Point>();
+		waypoints = new LinkedList<Point>();
 		this.speed = speed;
 	}
 	
@@ -68,5 +69,6 @@ public class Unit extends Interactable implements Movable, Attackable {
 		
 		return waypoints;
 	}
+
 	
 }
