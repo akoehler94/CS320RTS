@@ -22,9 +22,7 @@ public class StructureTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		s1 = new Structure(100,1);
-		s2 = new Structure(2500,5);
-		s3 = new Structure(600,3);
+		
 	}
 	
 	@Test
