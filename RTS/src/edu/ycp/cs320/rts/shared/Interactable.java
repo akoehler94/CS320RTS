@@ -38,6 +38,9 @@ public class Interactable extends GameObject implements Attackable{
 	@Override
 	public void damage(int damage) {
 		this.health -= damage;	
+		if(health <= 0){
+			death();
+		}
 	}
 
 	@Override

@@ -3,7 +3,6 @@
  */
 package edu.ycp.cs320.rts.client;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 import com.google.gwt.user.client.rpc.RemoteService;
@@ -18,5 +17,6 @@ import edu.ycp.cs320.rts.shared.*;
  */
 @RemoteServiceRelativePath("board")
 public interface GetBoardService extends RemoteService {
-	ArrayList<GameObject> getBoard(String username)  throws IllegalArgumentException;
+	
+	
 }

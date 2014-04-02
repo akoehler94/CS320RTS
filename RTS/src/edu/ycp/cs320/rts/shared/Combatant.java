@@ -24,9 +24,9 @@ public class Combatant extends Unit implements CanAttack {
 		this.lastfiredtime = 0;
 	}
 	 
-	public Combatant(int id, int owner, Point size, Point pos, int health, int speed, int def, int cooldown, int strenght, int range){
+	public Combatant(int id, int owner, Point size, Point pos, int health, int speed, int def, int cooldown, int strength, int range){
 		super(id, owner, size, pos, health, speed, def);
-		this.attackStrength = strenght;
+		this.attackStrength = strength;
 		this.attackRange = range;
 		this.cooldown = cooldown;
 		this.lastfiredtime = 0;

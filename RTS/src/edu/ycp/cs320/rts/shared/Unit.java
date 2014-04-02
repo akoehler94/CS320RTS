@@ -2,7 +2,6 @@ package edu.ycp.cs320.rts.shared;
 
 
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
 
 public class Unit extends Interactable implements Movable, Attackable {
