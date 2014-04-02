@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.ycp.cs320.rts.shared.Point;
 import edu.ycp.cs320.rts.shared.Structure;
 
 /**
@@ -22,7 +23,9 @@ public class StructureTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		
+		s1 = new Structure(1, 1, new Point(0,0), new Point(1,5), 1, 100);
+		s2 = new Structure(2, 1, new Point(0,0), new Point(1,5), 5, 2500);
+		s3 = new Structure(3, 1, new Point(0,0), new Point(1,5), 3, 600);
 	}
 	
 	@Test

@@ -1,6 +1,7 @@
 package edu.ycp.cs320.rts.client;
 
 import edu.ycp.cs320.rts.shared.FieldVerifier;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -11,8 +12,11 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -21,6 +25,12 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * Entry point classes define <code>onModuleLoad()</code>.
  */
 public class RTS implements EntryPoint {
+	
+	private Image combatantSprite;
+	private Image unitSprite;
+	private Image structureSprite;
+	private Image turretSprite;
+	
 	/**
 	 * The message displayed to the user when the server cannot be reached or
 	 * returns an error.
@@ -39,6 +49,45 @@ public class RTS implements EntryPoint {
 	 * This is the entry point method.
 	 */
 	public void onModuleLoad() {
+		
+		//load sprites
+				String combatantSpriteUrl = GWT.getModuleBaseForStaticFiles() + "combatantSprite.png";
+				String unitSpriteUrl = GWT.getModuleBaseForStaticFiles() + "unitSprite.png";
+				String structureSpriteUrl = GWT.getModuleBaseForStaticFiles() + "structureSprite.png";
+				String turretSpriteUrl = GWT.getModuleBaseForStaticFiles() + "turretSprite.png";
+				GWT.log("Combatant sprite: " + combatantSpriteUrl);
+				GWT.log("Unit sprite: " + unitSpriteUrl);
+				GWT.log("Structure sprite: " + structureSpriteUrl);
+				GWT.log("Turret sprite: " + turretSprite);
+				combatantSprite = new Image(combatantSpriteUrl);
+				unitSprite = new Image(unitSpriteUrl);
+				structureSprite = new Image(structureSpriteUrl);
+				turretSprite = new Image(turretSpriteUrl);
+				
+				//Generate a new game view
+				GameView view = new GameView();
+				view.setGameList(null);					//THIS NEEDS THE GAMELIST
+				
+				//more stuff
+				FlowPanel imagePanel = new FlowPanel();
+				imagePanel.add(combatantSprite);
+				imagePanel.add(unitSprite);
+				imagePanel.add(structureSprite);
+				imagePanel.add(turretSprite);
+				imagePanel.setSize("0px", "0px");
+				RootLayoutPanel.get().add(imagePanel);
+				
+				//add the view
+				RootLayoutPanel.get().add(view);
+				
+				view.setUnitSprite(unitSprite);
+				view.setCombatantSprite(combatantSprite);
+				view.setStructureSprite(structureSprite);
+				view.setTurretSprite(turretSprite);
+				
+
+				view.activate();
+		
 		final Button sendButton = new Button("Send");
 		final TextBox nameField = new TextBox();
 		nameField.setText("GWT User");

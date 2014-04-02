@@ -17,5 +17,4 @@ import edu.ycp.cs320.rts.shared.Point;
  */
 public interface GetBoardServiceAsync {
 	
-
 }
