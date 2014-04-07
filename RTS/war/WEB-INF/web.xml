@@ -6,9 +6,19 @@
     <servlet-class>edu.ycp.cs320.rts.server.GreetingServiceImpl</servlet-class>
   </servlet>
   
+  <servlet>
+    <servlet-name>boardServlet</servlet-name>
+    <servlet-class>edu.ycp.cs320.rts.server.GetBoardServiceImpl</servlet-class>
+  </servlet>
+  
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
     <url-pattern>/rts/greet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet-mapping>
+    <servlet-name>boardServlet</servlet-name>
+    <url-pattern>/rts/board</url-pattern>
   </servlet-mapping>
   
   <!-- Default page to serve -->

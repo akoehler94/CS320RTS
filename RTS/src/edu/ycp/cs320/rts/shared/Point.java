@@ -3,12 +3,15 @@
  */
 package edu.ycp.cs320.rts.shared;
 
+import java.io.Serializable;
+
 /**
  * @author Dan
  *
  * Mar 13, 2014
  */
-public class Point implements Comparable<Point>{
+@SuppressWarnings("serial")
+public class Point implements Comparable<Point>, Serializable{
 	private int x;
 	private int y;
 	

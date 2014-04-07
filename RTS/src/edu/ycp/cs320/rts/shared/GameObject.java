@@ -3,12 +3,15 @@
  */
 package edu.ycp.cs320.rts.shared;
 
+import java.io.Serializable;
+
 /**
  * @author Dan
  * 
  *         Mar 13, 2014
  */
-public class GameObject {
+@SuppressWarnings("serial")
+public class GameObject implements Serializable{
 	private Point position;
 	private Point size;
 	private int owner;

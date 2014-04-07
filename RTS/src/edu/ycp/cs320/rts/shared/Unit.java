@@ -1,10 +1,12 @@
 package edu.ycp.cs320.rts.shared;
 
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Unit extends Interactable implements Movable, Attackable {
+@SuppressWarnings("serial")
+public class Unit extends Interactable implements Movable, Attackable, Serializable {
 	
 	private int speed;
 	private Queue<Point> waypoints;

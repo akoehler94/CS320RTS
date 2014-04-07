@@ -1,6 +1,9 @@
 package edu.ycp.cs320.rts.shared;
 
-public class Structure extends Interactable{
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Structure extends Interactable implements Serializable {
 	
 	/**
 	 * 

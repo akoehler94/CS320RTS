@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.google.gwt.canvas.client.Canvas;
 import com.google.gwt.canvas.dom.client.Context2d;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.user.client.Timer;
@@ -65,7 +66,7 @@ public class GameView extends Composite {
 		this.timer = new Timer() {
 			@Override
 			public void run() {
-				if (list.size()>0) {
+				if (list!=null) {
 					paint(list);
 				}
 			}
@@ -102,25 +103,29 @@ public class GameView extends Composite {
 
 	// Render one frame of animation.
 	protected void paint(ArrayList<GameObject> list) {
-		// Draw onto buffer
+	// Draw onto buffer
 
 		// Draw background
-		bufCtx.setFillStyle("black");
+		bufCtx.setFillStyle("white");
 		bufCtx.fillRect(0, 0, WIDTH, HEIGHT);
 
 		// Draw game objects
 		for(int i=0; i<list.size();i++){
-			if(list.get(i).getImageName()=="combatantSprite.png"){
+			if(list.get(i).getImageName().equals("combatantSprite.png")){
 				setSprite(combatantSprite);
 			}
-			if(list.get(i).getImageName()=="unitSprite.png"){
+			if(list.get(i).getImageName().equals("unitSprite.png")){
 				setSprite(unitSprite);
 			}
-			if(list.get(i).getImageName()=="structureSprite.png"){
+			if(list.get(i).getImageName().equals("structureSprite.png")){
 				setSprite(structureSprite);
 			}
-			if(list.get(i).getImageName()=="turretSprite.png"){
+			if(list.get(i).getImageName().equals("turretSprite.png")){
 				setSprite(turretSprite);
+			}
+			
+			if (sprite == null) {
+				GWT.log("Sprite is null?");
 			}
         
 			bufCtx.drawImage(

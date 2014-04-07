@@ -3,12 +3,15 @@
  */
 package edu.ycp.cs320.rts.shared;
 
+import java.io.Serializable;
+
 /**
  * @author Dan
  *
  * Mar 19, 2014
  */
-public class Combatant extends Unit implements CanAttack {
+@SuppressWarnings("serial")
+public class Combatant extends Unit implements CanAttack, Serializable {
 	
 	private int attackStrength;
 	private int attackRange;

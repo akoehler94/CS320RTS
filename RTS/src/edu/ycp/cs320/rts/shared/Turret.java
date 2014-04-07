@@ -1,6 +1,9 @@
 package edu.ycp.cs320.rts.shared;
 
-public class Turret extends Structure implements CanAttack {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Turret extends Structure implements CanAttack, Serializable {
 	private int attackStrength;
 	private int attackRange;
 	private int cooldown;
