@@ -91,7 +91,6 @@ public class RTS implements EntryPoint {
 
 			@Override
 			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
 				GWT.log("failed "+ caught.getMessage());
 				
 			}
