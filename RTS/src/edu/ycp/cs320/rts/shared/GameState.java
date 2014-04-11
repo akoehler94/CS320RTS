@@ -85,6 +85,15 @@ public class GameState implements IsSerializable{
 	public void addMoveRequest(MoveRequest re){
 		moveRequests.add(re);
 	}
+	
+	/**
+	 * Adds a new movement requests
+	 * 
+	 * @param re
+	 */
+	public void addMoveRequests(ArrayList<MoveRequest> re){
+		moveRequests.addAll(re);
+	}
 
 	/**
 	 * @return the buildRequests
@@ -98,6 +107,13 @@ public class GameState implements IsSerializable{
 	 */
 	public void setBuildRequests(ArrayList<BuildRequest> buildRequests) {
 		this.buildRequests = buildRequests;
+	}
+	
+	/**
+	 * @param buildRequests the buildRequests to add
+	 */
+	public void addBuildRequests(ArrayList<BuildRequest> buildRequests) {
+		this.buildRequests.addAll(buildRequests);
 	}
 	
 	/**
