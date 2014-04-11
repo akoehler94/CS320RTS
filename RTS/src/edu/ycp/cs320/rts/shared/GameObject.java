@@ -113,5 +113,14 @@ public class GameObject implements Serializable{
 	public void setImageName(String imageName) {
 		this.imageName = imageName;
 	}
+	
+	public boolean checkBounds(Point point){
+		Point positiveCorner = getPosition();
+		positiveCorner.add(getSize());//add the size to the position to get the corner opposite the origin
+		if(point.getX()>=getPosition().getX()&&point.getX()<=positiveCorner.getX()&&point.getY()>=getPosition().getY()&&point.getY()<=positiveCorner.getY())
+			return true;
+		else 
+			return false;
+	}
 
 }
