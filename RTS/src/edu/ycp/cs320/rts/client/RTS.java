@@ -5,8 +5,10 @@ import java.util.TreeMap;
 
 import edu.ycp.cs320.rts.shared.GameObject;
 import edu.ycp.cs320.rts.shared.GameState;
+
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -21,6 +23,10 @@ public class RTS implements EntryPoint {
 	private Image unitSprite;
 	private Image structureSprite;
 	private Image turretSprite;
+	private Timer updateTimer;
+	private int ownerID;
+	private GameView view;
+	private GameState state;
 
 	/**
 	 * The message displayed to the user when the server cannot be reached or
@@ -62,9 +68,9 @@ public class RTS implements EntryPoint {
 		
 		// Generate a new game view
 		
-		final GameView view = new GameView();
+		view = new GameView();
 		
-		GameState state = new GameState(new ArrayList<GameObject>(), new TreeMap<String, Integer>());
+		state = new GameState(new ArrayList<GameObject>(), new TreeMap<String, Integer>());
 		
 		view.setGameList(state.getGameobjects());
 
@@ -110,5 +116,44 @@ public class RTS implements EntryPoint {
 		view.activate();
 		
 		
+		this.updateTimer = new Timer() {
+
+			@Override
+			public void run() {
+				updateGameState();
+			}
+		};
+		
+		updateTimer.scheduleRepeating(1000);
+		
 	}
+	public void setOwnerID(int id){
+		this.ownerID=id;
+	}
+	public void updateGameState(){
+		GetBoardServiceAsync boardservice = (GetBoardServiceAsync) GWT.create(GetBoardService.class);
+		
+		AsyncCallback<GameState> callback = new AsyncCallback<GameState>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+				GWT.log("failed "+ caught.getMessage());
+				
+			}
+
+			@Override
+			public void onSuccess(GameState result) {
+				GWT.log("Success");
+				GameState newstate =(GameState) result;
+				view.setGameList(newstate.getGameobjects());
+				
+			}
+		};
+		
+
+		boardservice.exchangeGameState(state, callback);
+	
+	}
+	
 }

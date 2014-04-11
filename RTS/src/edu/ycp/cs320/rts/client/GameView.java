@@ -7,13 +7,17 @@ import com.google.gwt.canvas.dom.client.Context2d;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.CanvasElement;
 import com.google.gwt.dom.client.ImageElement;
+import com.google.gwt.dom.client.NativeEvent;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.Image;
 
 import edu.ycp.cs320.rts.shared.GameObject;
+import edu.ycp.cs320.rts.shared.Point;
 
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
 
 /**
  * View for RTS model class.
@@ -32,12 +36,17 @@ public class GameView extends Composite {
 	private Image structureSprite;
 	private Image turretSprite;
 	private ArrayList<GameObject> list;
+	private Point mouseStart;
+	private UIController uIController; 
+	private int ownerID;
 
 	/**
 	 * Constructor.
 	 */
 	public GameView() {
 		
+		
+		uIController = new UIController();
 		
 		// A canvas needs to be in a FocusPanel if it will handle keyboard input.
 		FocusPanel panel = new FocusPanel();
@@ -54,6 +63,11 @@ public class GameView extends Composite {
 		// The visible canvas: contents of buffer are copied here once
 		// a frame has been rendered.
 		this.canvas = Canvas.createIfSupported();
+		canvas.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				handleMouseClick(event);
+			}
+		});
 		canvas.setSize(WIDTH + "px", HEIGHT + "px");
 		canvas.setCoordinateSpaceWidth(WIDTH);
 		canvas.setCoordinateSpaceHeight(HEIGHT);
@@ -61,7 +75,9 @@ public class GameView extends Composite {
 		panel.add(canvas);
 
 		initWidget(panel);
-
+		
+		
+		
 		// Animation timer
 		this.timer = new Timer() {
 			@Override
@@ -71,6 +87,19 @@ public class GameView extends Composite {
 				}
 			}
 		};
+	}
+	
+	private void handleMouseClick(ClickEvent event) {
+		mouseStart.setX(event.getX());
+		mouseStart.setY(event.getY());
+		NativeEvent nativeEvent = event.getNativeEvent();
+		if(nativeEvent.getButton()==NativeEvent.BUTTON_LEFT){
+			this.uIController.determineSelect(mouseStart);
+				
+		}
+		
+		
+		
 	}
 
 	public void setSprite(Image sprite) {
@@ -91,6 +120,10 @@ public class GameView extends Composite {
 
 	public void setGameList(ArrayList<GameObject> list){
 		this.list = list;
+	}
+	
+	public void setOwnerID(int id){
+		this.ownerID=id;
 	}
 	
 	
