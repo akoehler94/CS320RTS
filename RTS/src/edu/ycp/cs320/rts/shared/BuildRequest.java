@@ -15,7 +15,7 @@ public class BuildRequest extends Request implements Serializable{
 	
 	private Point buildpoint;
 	
-	public BuildRequest(String userId, Point point) {
+	public BuildRequest(int userId, Point point) {
 		super(userId);
 		setBuildpoint(point);
 	}

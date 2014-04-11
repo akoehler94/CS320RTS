@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 @SuppressWarnings("serial")
 public class MoveRequest extends Request implements Serializable{
-	private String unitId;
+	private int unitId;
 	private Point newWaypoint;
 	
 	/**
@@ -21,7 +21,7 @@ public class MoveRequest extends Request implements Serializable{
 	 * @param target
 	 * @param newPoint
 	 */
-	public MoveRequest(String user, String target, Point newPoint){
+	public MoveRequest(int user, int target, Point newPoint){
 		super(user);
 		unitId = target;
 		newWaypoint = newPoint;
@@ -29,13 +29,13 @@ public class MoveRequest extends Request implements Serializable{
 	/**
 	 * @return the unitId
 	 */
-	public String getUnitId() {
+	public int getUnitId() {
 		return unitId;
 	}
 	/**
 	 * @param unitId the unitId to set
 	 */
-	public void setUnitId(String unitId) {
+	public void setUnitId(int unitId) {
 		this.unitId = unitId;
 	}
 
