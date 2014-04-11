@@ -12,23 +12,23 @@ import java.io.Serializable;
  */
 @SuppressWarnings("serial")
 public class Request implements Serializable{
-	private String userId;
+	private int userId;
 	
-	public Request(String userId){
+	public Request(int userId){
 		this.setUserId(userId);
 	}
 
 	/**
 	 * @return the userId
 	 */
-	public String getUserId() {
+	public int getUserId() {
 		return userId;
 	}
 
 	/**
 	 * @param userId the userId to set
 	 */
-	public void setUserId(String userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 }

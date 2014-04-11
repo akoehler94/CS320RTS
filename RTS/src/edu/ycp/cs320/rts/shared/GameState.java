@@ -19,6 +19,7 @@ public class GameState implements IsSerializable{
 	private TreeMap<String, Integer> resources;
 	private ArrayList<MoveRequest> moveRequests;
 	private ArrayList<BuildRequest> buildRequests;
+	private ArrayList<AttackRequest> attackRequests;
 	
 	/**
 	 * 
@@ -123,6 +124,27 @@ public class GameState implements IsSerializable{
 	public void addBuildRequest(BuildRequest req){
 		this.buildRequests.add(req);
 	}
+
+	/**
+	 * @return the attackRequests
+	 */
+	public ArrayList<AttackRequest> getAttackRequests() {
+		return attackRequests;
+	}
+
+	/**
+	 * @param attackRequests the attackRequests to set
+	 */
+	public void setAttackRequests(ArrayList<AttackRequest> attackRequests) {
+		this.attackRequests = attackRequests;
+	}
 	
+	/**
+	 * 
+	 * @param req
+	 */
+	public void addAttackRequests(ArrayList<AttackRequest> req) {
+		this.attackRequests.addAll(req);
+	}
 
 }
