@@ -3,6 +3,8 @@ package edu.ycp.cs320.rts.client;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
+import com.google.gwt.core.shared.GWT;
+
 import edu.ycp.cs320.rts.shared.Attackable;
 import edu.ycp.cs320.rts.shared.CanAttack;
 import edu.ycp.cs320.rts.shared.GameObject;
@@ -20,8 +22,8 @@ public class UIController {
 		
 	}
 	
-	public void setGameState(GameState state){
-		this.state=state;
+	public void setGameList(ArrayList<GameObject> list){
+		this.state.setGameobjects(list);
 	}
 	
 	/**
@@ -32,14 +34,16 @@ public class UIController {
 	 * @return Returns true if an object was selected.
 	 */
 	public boolean determineSelect(Point click){
-		GameObject currentObject=null;
-		for(int i=0; i<state.getGameobjects().size();i++){
-			currentObject=state.getGameobjects().get(i);
-			if(currentObject.checkBounds(click)){
-				this.selectedObject=currentObject;
+		GameObject currentObject;
+		GWT.log("Left Click");
+		for(GameObject obj: state.getGameobjects()){
+			if(obj.checkBounds(click)){
+				this.selectedObject=obj;
+				GWT.log("Object with id " + selectedObject.getId() + " selected.");
 				return true;
 			}
 		}
+		GWT.log("Nothing Selected");
 		return false;
 	}
 	/**
