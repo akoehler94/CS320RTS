@@ -147,6 +147,7 @@ public class RTS implements EntryPoint {
 				//GWT.log("Success");
 				GameState newstate =(GameState) result;
 				view.setGameList(newstate.getGameobjects());
+				state = result;
 				
 			}
 		};

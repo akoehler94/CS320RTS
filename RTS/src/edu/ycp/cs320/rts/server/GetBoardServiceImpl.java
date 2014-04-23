@@ -18,19 +18,20 @@ public class GetBoardServiceImpl extends RemoteServiceServlet implements GetBoar
 	public GameState exchangeGameState(GameState state){
 		
 		GetGamestate controller = new GetGamestate();
-		state = controller.getGameState();
+		//state = controller.getGameState();
 		
 		int i = (int) (Math.random() * 9);
 		int j = (int) (Math.random() * 9);
 		//System.out.println(i);
 		
-		Structure test = new Structure(1, 1, new Point(50*i, 50*j), new Point(
+		Structure test = new Structure(i, 1, new Point(50*i, 50*j), new Point(
 				128, 128), 1, 100);
 		test.setImageName("structureSprite.png");
 		
-		controller.getGameState().getGameobjects().add(test);
+		//controller.getGameState().getGameobjects().add(test);
 		
-		
-		return controller.getGameState();	
+		state.getGameobjects().add(test);
+		return state;
+		//return controller.getGameState();	
 	}
 }

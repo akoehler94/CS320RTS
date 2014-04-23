@@ -13,7 +13,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  *
  * Mar 31, 2014
  */
-public class GameState implements IsSerializable{
+public class GameState implements IsSerializable, Cloneable{
 	
 	private ArrayList<GameObject> gameobjects;
 	private TreeMap<String, Integer> resources;
@@ -145,6 +145,19 @@ public class GameState implements IsSerializable{
 	 */
 	public void addAttackRequests(ArrayList<AttackRequest> req) {
 		this.attackRequests.addAll(req);
+	}
+	
+	@Override
+	public GameState clone() {
+		try {
+			GameState dup = (GameState) super.clone();
+			
+			// TODO: make a deep copy
+			
+			return dup;
+		} catch (CloneNotSupportedException e) {
+			throw new IllegalStateException("Can't happen", e);
+		}
 	}
 
 }

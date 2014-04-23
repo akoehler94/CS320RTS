@@ -2,6 +2,7 @@ package edu.ycp.cs320.rts.server;
 
 import edu.ycp.cs320.rts.client.GreetingService;
 import edu.ycp.cs320.rts.shared.FieldVerifier;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 /**
@@ -45,5 +46,17 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 		}
 		return html.replaceAll("&", "&amp;").replaceAll("<", "&lt;")
 				.replaceAll(">", "&gt;");
+	}
+
+	@Override
+	public Boolean login(String username, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Boolean newuser(String username, String password, String email) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
