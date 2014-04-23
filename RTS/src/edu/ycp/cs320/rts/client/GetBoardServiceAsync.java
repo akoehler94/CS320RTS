@@ -7,6 +7,8 @@ package edu.ycp.cs320.rts.client;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 
+
+
 import edu.ycp.cs320.rts.shared.GameState;
 
 
@@ -18,5 +20,10 @@ import edu.ycp.cs320.rts.shared.GameState;
 public interface GetBoardServiceAsync {
 
 	void exchangeGameState(GameState state, AsyncCallback<GameState> callback);
+
+	void login(String username, String password, AsyncCallback<Boolean> callback);
+
+	void newuser(String username, String password, String email,
+			AsyncCallback<Boolean> callback);
 	
 }

@@ -8,9 +8,4 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 public interface GreetingServiceAsync {
 	void greetServer(String input, AsyncCallback<String> callback)
 			throws IllegalArgumentException;
-
-	void login(String username, String password, AsyncCallback<Boolean> callback);
-
-	void newuser(String username, String password, String email,
-			AsyncCallback<Boolean> callback);
 }

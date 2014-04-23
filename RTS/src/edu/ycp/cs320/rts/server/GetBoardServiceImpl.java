@@ -24,7 +24,9 @@ public class GetBoardServiceImpl extends RemoteServiceServlet implements GetBoar
 		int j = (int) (Math.random() * 9);
 		//System.out.println(i);
 		
-		Structure test = new Structure(i, 1, new Point(50*i, 50*j), new Point(
+		int id = new Integer(""+ System.currentTimeMillis());
+		
+		Structure test = new Structure(id, 1, new Point(50*i, 50*j), new Point(
 				128, 128), 1, 100);
 		test.setImageName("structureSprite.png");
 		
@@ -33,5 +35,15 @@ public class GetBoardServiceImpl extends RemoteServiceServlet implements GetBoar
 		state.getGameobjects().add(test);
 		return state;
 		//return controller.getGameState();	
+	}
+
+	public Boolean login(String username, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Boolean newuser(String username, String password, String email) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

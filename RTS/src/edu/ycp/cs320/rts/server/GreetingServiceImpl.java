@@ -48,15 +48,5 @@ public class GreetingServiceImpl extends RemoteServiceServlet implements
 				.replaceAll(">", "&gt;");
 	}
 
-	@Override
-	public Boolean login(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public Boolean newuser(String username, String password, String email) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }
