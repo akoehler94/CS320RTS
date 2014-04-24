@@ -33,7 +33,10 @@ public class GameState implements IsSerializable, Cloneable{
 	
 	public GameState(GameState s){
 		this.gameobjects = (ArrayList<GameObject>) s.getGameobjects().clone();
-		//this.resources = (TreeMap<String, Integer>) s.getResources().clone();
+		this.resources = new TreeMap<String, Integer>();
+		for(String k: s.getResources().keySet()){
+			this.resources.put(k, s.getResources().get(k));
+		}
 		this.buildRequests = (ArrayList<BuildRequest>) s.getBuildRequests().clone();
 		this.attackRequests = (ArrayList<AttackRequest>) s.getAttackRequests().clone();
 	}
