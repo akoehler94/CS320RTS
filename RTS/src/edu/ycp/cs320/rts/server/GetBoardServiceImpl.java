@@ -24,7 +24,7 @@ public class GetBoardServiceImpl extends RemoteServiceServlet implements GetBoar
 		int j = (int) (Math.random() * 9);
 		//System.out.println(i);
 		
-		int id = new Integer(""+ System.currentTimeMillis());
+		int id = new Integer(""+ System.currentTimeMillis() % 1000000);
 		
 		Structure test = new Structure(id, 1, new Point(50*i, 50*j), new Point(
 				128, 128), 1, 100);

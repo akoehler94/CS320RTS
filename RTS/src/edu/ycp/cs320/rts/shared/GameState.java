@@ -31,6 +31,13 @@ public class GameState implements IsSerializable, Cloneable{
 		setResources(userres);
 	}
 	
+	public GameState(GameState s){
+		this.gameobjects = (ArrayList<GameObject>) s.getGameobjects().clone();
+		//this.resources = (TreeMap<String, Integer>) s.getResources().clone();
+		this.buildRequests = (ArrayList<BuildRequest>) s.getBuildRequests().clone();
+		this.attackRequests = (ArrayList<AttackRequest>) s.getAttackRequests().clone();
+	}
+	
 	public GameState(){
 		setGameobjects(new ArrayList<GameObject>());
 		setResources(new TreeMap<String, Integer>());
@@ -147,17 +154,13 @@ public class GameState implements IsSerializable, Cloneable{
 		this.attackRequests.addAll(req);
 	}
 	
-	@Override
+	
 	public GameState clone() {
-		try {
-			GameState dup = (GameState) super.clone();
-			
-			// TODO: make a deep copy
-			
+		
+			GameState dup = new GameState(this);
 			return dup;
-		} catch (CloneNotSupportedException e) {
-			throw new IllegalStateException("Can't happen", e);
-		}
+			
+		
 	}
 
 }
