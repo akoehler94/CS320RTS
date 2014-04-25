@@ -48,6 +48,7 @@ public class GameView extends Composite {
 		
 		uIController = new UIController();
 		
+		
 		// A canvas needs to be in a FocusPanel if it will handle keyboard input.
 		FocusPanel panel = new FocusPanel();
 		panel.setSize(WIDTH + "px", HEIGHT + "px");
@@ -90,9 +91,11 @@ public class GameView extends Composite {
 	}
 	
 	private void handleMouseClick(ClickEvent event) {
+		mouseStart = new Point();
 		mouseStart.setX(event.getX());
 		mouseStart.setY(event.getY());
 		NativeEvent nativeEvent = event.getNativeEvent();
+		this.uIController.setGameList(list);
 		if(nativeEvent.getButton()==NativeEvent.BUTTON_LEFT){
 			this.uIController.determineSelect(mouseStart);
 				

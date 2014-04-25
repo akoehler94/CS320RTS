@@ -72,6 +72,7 @@ public class RTS implements EntryPoint {
 		
 		state = new GameState(new ArrayList<GameObject>(), new TreeMap<String, Integer>());
 		
+		
 		view.setGameList(state.getGameobjects());
 
 		// more stuff
@@ -103,7 +104,7 @@ public class RTS implements EntryPoint {
 
 			@Override
 			public void onSuccess(GameState result) {
-				GWT.log("Success");
+				//GWT.log("Success");
 				GameState newstate =(GameState) result;
 				view.setGameList(newstate.getGameobjects());
 				
@@ -143,7 +144,7 @@ public class RTS implements EntryPoint {
 
 			@Override
 			public void onSuccess(GameState result) {
-				GWT.log("Success");
+				//GWT.log("Success");
 				GameState newstate =(GameState) result;
 				view.setGameList(newstate.getGameobjects());
 				state = result;

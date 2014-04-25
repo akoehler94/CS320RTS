@@ -115,7 +115,9 @@ public class GameObject implements Serializable{
 	}
 	
 	public boolean checkBounds(Point point){
-		Point positiveCorner = getPosition();
+		System.out.println("click at (" + point.getX() + "," + point.getY() + ")");
+		Point positiveCorner = new Point();
+		positiveCorner.add(getPosition());
 		positiveCorner.add(getSize());//add the size to the position to get the corner opposite the origin
 		if(point.getX()>=getPosition().getX()&&point.getX()<=positiveCorner.getX()&&point.getY()>=getPosition().getY()&&point.getY()<=positiveCorner.getY())
 			return true;
