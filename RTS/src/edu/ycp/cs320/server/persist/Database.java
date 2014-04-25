@@ -6,6 +6,7 @@ package edu.ycp.cs320.server.persist;
  *
  */
 public class Database {
+	// this is the line to change to reference derby database
 private static final IDatabase theInstance = new FakeDatabase();
 	
 	/**

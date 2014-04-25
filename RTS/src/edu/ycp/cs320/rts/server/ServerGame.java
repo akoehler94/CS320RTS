@@ -44,4 +44,5 @@ public class ServerGame {
 	public void updateGameState(GameState gamestate) {
 		this.gamestate = gamestate;
 	}
+	
 }
