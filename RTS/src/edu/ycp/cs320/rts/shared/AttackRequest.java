@@ -18,6 +18,12 @@ public class AttackRequest extends Request {
 		setSourceUnit(source);
 		setTargetUnit(target);
 	}
+	
+	public AttackRequest() {
+		super();
+		setSourceUnit(0);
+		setTargetUnit(0);
+	}
 
 	/**
 	 * @return the sourceUnit

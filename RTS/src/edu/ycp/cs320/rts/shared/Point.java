@@ -5,13 +5,15 @@ package edu.ycp.cs320.rts.shared;
 
 import java.io.Serializable;
 
+import com.google.gwt.user.client.rpc.IsSerializable;
+
 /**
  * @author Dan
  *
  * Mar 13, 2014
  */
 @SuppressWarnings("serial")
-public class Point implements Comparable<Point>, Serializable{
+public class Point implements Comparable<Point>, Serializable, IsSerializable{
 	private int x;
 	private int y;
 	

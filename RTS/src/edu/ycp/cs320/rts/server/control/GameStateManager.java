@@ -3,7 +3,9 @@ package edu.ycp.cs320.rts.server.control;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.ycp.cs320.rts.shared.BuildRequest;
 import edu.ycp.cs320.rts.shared.GameState;
+import edu.ycp.cs320.rts.shared.Request;
 
 /**
  * Manage shared {@link GameState} by allowing multiple clients
@@ -37,7 +39,13 @@ public class GameStateManager {
 						}
 						
 						// TODO: incorporate proposed updates into shared game state
-						
+						for(GameState gs: proposedUpdates){
+							gs.getAttackRequests();
+							gs.getBuildRequests();
+							gs.getMoveRequests();
+							gs.getResources();
+							
+						}
 						// Distribute new shared game state to clients
 						for (ClientChannel channel : channelList) {
 							GameState copy = sharedGameState.clone();

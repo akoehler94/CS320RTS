@@ -13,6 +13,7 @@ import edu.ycp.cs320.rts.server.control.ClientChannel;
 import edu.ycp.cs320.rts.server.control.GameStateManager;
 import edu.ycp.cs320.rts.server.control.GetGamestate;
 import edu.ycp.cs320.rts.server.control.SetGameState;
+import edu.ycp.cs320.rts.shared.BuildRequest;
 import edu.ycp.cs320.rts.shared.GameState;
 import edu.ycp.cs320.rts.shared.Point;
 import edu.ycp.cs320.rts.shared.Structure;
@@ -22,7 +23,7 @@ public class GetBoardServiceImpl extends RemoteServiceServlet implements GetBoar
 	
 	
 	
-	//This breaks everything
+	
 	 public void init(ServletConfig config) throws ServletException {
 		 super.init(config);
 		 
@@ -30,8 +31,7 @@ public class GetBoardServiceImpl extends RemoteServiceServlet implements GetBoar
 		 GameState state = new GetGamestate().getGameState();
 		 GameStateManager manage = new GameStateManager(state);
 		 
-		 // specificlly starting the thread breaks everything
-		 //manage.start();
+		// manage.start();
 		 
 	 }
 	 
@@ -50,7 +50,9 @@ public class GetBoardServiceImpl extends RemoteServiceServlet implements GetBoar
 				128, 128), 1, 100);
 		test.setImageName("structureSprite.png");
 		
-		state.getGameobjects().add(test);
+		//state.getGameobjects().add(test);
+		
+		state.addBuildRequest(new BuildRequest(1, new Point(2,2)));
 		
 		//ClientChannel channel = new ClientChannel();
 		

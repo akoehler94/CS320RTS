@@ -29,6 +29,9 @@ public class GameState implements IsSerializable, Cloneable{
 	public GameState(ArrayList<GameObject> objects, TreeMap<String, Integer> userres){
 		setGameobjects(objects);
 		setResources(userres);
+		moveRequests = new ArrayList<MoveRequest>();
+		buildRequests = new ArrayList<BuildRequest>();
+		attackRequests = new ArrayList<AttackRequest>();
 	}
 	
 	public GameState(GameState s){

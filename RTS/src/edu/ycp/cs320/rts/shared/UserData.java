@@ -13,6 +13,19 @@ public class UserData {
 	private String username;
 	private String email;
 	private String passwordhash;
+	
+	public UserData(String user, String email, String passwordhash){
+		this.username = user;
+		this.email = email;
+		this.passwordhash = passwordhash;
+	}
+	
+	public UserData(){
+		this.username = " ";
+		this.email = " ";
+		this.passwordhash = " ";
+	}
+	
 	/**
 	 * @return the username
 	 */

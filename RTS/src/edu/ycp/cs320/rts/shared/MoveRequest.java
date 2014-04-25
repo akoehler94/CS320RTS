@@ -26,6 +26,12 @@ public class MoveRequest extends Request implements Serializable{
 		unitId = target;
 		newWaypoint = newPoint;
 	}
+	
+	public MoveRequest(){
+		super();
+		unitId = 0;
+		newWaypoint = new Point();
+	}
 	/**
 	 * @return the unitId
 	 */
