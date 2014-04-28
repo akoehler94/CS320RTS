@@ -16,6 +16,7 @@ public class UIController {
 	
 	private GameState state = new GameState(new ArrayList<GameObject>(), new TreeMap<String, Integer>());
 	private GameObject selectedObject;
+	private GameObject targetObject;
 	private int ownerID;
 	
 	public UIController(){
@@ -34,16 +35,15 @@ public class UIController {
 	 * @return Returns true if an object was selected.
 	 */
 	public boolean determineSelect(Point click){
-		GameObject currentObject;
 		GWT.log("Left Click");
 		for(GameObject obj: state.getGameobjects()){
 			if(obj.checkBounds(click)){
 				this.selectedObject=obj;
-				GWT.log("Object with id " + selectedObject.getId() + " selected.");
+				GWT.log("Object id:" + selectedObject.getId() + " selected.");
 				return true;
 			}
 		}
-		GWT.log("Nothing Selected");
+		GWT.log("Click yielded no action");
 		return false;
 	}
 	/**
@@ -54,25 +54,39 @@ public class UIController {
 	 * @return Returns 1 if an object issued an attack order, 0 if an object was issued a move order, and -1 if no order was issued..
 	 */
 	public int determineAction(Point click){
-		GameObject targetObject=null;
-		for(int i=0; i<state.getGameobjects().size();i++){
-			targetObject=state.getGameobjects().get(i);
-			if(targetObject.checkBounds(click)){
-				this.selectedObject=targetObject;
+		GWT.log("Right Click");
+		if(this.selectedObject!=null){//make sure an object is selected
+			for(GameObject obj: state.getGameobjects()){
+				if(targetObject.checkBounds(click)){
+					this.targetObject=obj;
+					GWT.log("Object id:" + targetObject.getId() + " targeted by object id:" + selectedObject.getId() + ".");
+				}
+			}
+			if(this.targetObject!=null){//if no target was made, target must be a point for move order	
+					if(selectedObject instanceof Movable){
+						//GIVE MOVE ORDER
+						((Movable) selectedObject).addWaypoint(click);
+						GWT.log("Move order received by object id:" + selectedObject.getId() + ".");
+						return 0;
+					}
+					else{
+						GWT.log("Click yielded no action; object id:" + selectedObject.getId() + " (" + selectedObject.getClass().getName() + ") cannot receive move orders.");
+						return-1;
+					}	
+			}
+			if(this.selectedObject.getOwner()!=this.targetObject.getOwner()){//if objects are not of the same owner
+				if(targetObject instanceof Attackable&&this.selectedObject instanceof CanAttack){
+					//GIVE ATTACK ORDER
+					GWT.log("Attack order received by object id:" + selectedObject.getId() + " on object id:" + targetObject.getId() + ".");
+					return 1;
+				}
+				else{
+					GWT.log("Click yielded no action; either selected object id:" + selectedObject.getId() + " (" + selectedObject.getClass().getName() + ") cannot receive attack orders or target object id:" + targetObject.getId() + " (" + targetObject.getClass().getName() + ") cannot be attacked");
+					return-1;
+				}	
 			}
 		}
-		if(this.selectedObject!=null&&this.selectedObject.getOwner()==this.ownerID){
-			if(targetObject!=null&&targetObject.getOwner()!=this.ownerID&&targetObject instanceof Attackable&&this.selectedObject instanceof CanAttack){
-				
-				
-				return 1;
-			}
-			else{	
-				if(selectedObject instanceof Movable)
-					((Movable) selectedObject).addWaypoint(click);
-				return 0;
-			}
-		}
+		GWT.log("Click yielded no action");
 		return-1;
 	}
 	public void setOwnerID(int id){

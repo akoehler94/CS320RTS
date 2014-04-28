@@ -98,6 +98,9 @@ public class GameView extends Composite {
 		this.uIController.setGameList(list);
 		if(nativeEvent.getButton()==NativeEvent.BUTTON_LEFT){
 			this.uIController.determineSelect(mouseStart);
+		}
+		if(nativeEvent.getButton()==NativeEvent.BUTTON_RIGHT){
+				this.uIController.determineAction(mouseStart);
 				
 		}
 		
