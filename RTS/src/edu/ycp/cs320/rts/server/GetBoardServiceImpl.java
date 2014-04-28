@@ -21,7 +21,7 @@ import edu.ycp.cs320.rts.shared.Structure;
 @SuppressWarnings("serial")
 public class GetBoardServiceImpl extends RemoteServiceServlet implements GetBoardService {
 	
-	
+	private static GameStateManager manage;
 	
 	
 	 public void init(ServletConfig config) throws ServletException {
@@ -29,14 +29,22 @@ public class GetBoardServiceImpl extends RemoteServiceServlet implements GetBoar
 		 
 		 
 		 GameState state = new GetGamestate().getGameState();
-		 GameStateManager manage = new GameStateManager(state);
+		 manage = new GameStateManager(state);
+		 System.out.println("Created GameStateManager");
 		 
-		// manage.start();
+		manage.start();
 		 
 	 }
 	 
 	public GameState exchangeGameState(GameState state){
 		
+		ClientChannel channel;
+		channel = (ClientChannel) getThreadLocalRequest().getSession().getAttribute("clientChannel");
+		if (channel == null) {
+			channel = manage.connect();
+			getThreadLocalRequest().setAttribute("clientChannel", channel);
+				
+		}
 		GetGamestate controller = new GetGamestate();
 		//state = controller.getGameState();
 		
@@ -50,13 +58,21 @@ public class GetBoardServiceImpl extends RemoteServiceServlet implements GetBoar
 				128, 128), 1, 100);
 		test.setImageName("structureSprite.png");
 		
-		//state.getGameobjects().add(test);
+		if(state != null){
+			state.getGameobjects().add(test);
+			state.addBuildRequest(new BuildRequest(1, new Point(2,2)));
+		}
+		else{
+			System.out.println("The game state is null");
+		}
 		
-		state.addBuildRequest(new BuildRequest(1, new Point(2,2)));
 		
-		//ClientChannel channel = new ClientChannel();
 		
-		//state = channel.update(state);
+		
+		state = channel.update(state);
+		if (state == null) {
+			System.out.println("Client channel update returned null?");
+		}
 		
 		return state;
 	}

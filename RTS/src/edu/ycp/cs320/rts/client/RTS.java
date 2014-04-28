@@ -106,7 +106,14 @@ public class RTS implements EntryPoint {
 			public void onSuccess(GameState result) {
 				//GWT.log("Success");
 				GameState newstate =(GameState) result;
-				view.setGameList(newstate.getGameobjects());
+				
+				if(newstate == null){
+					GWT.log("the gamestate was not updated");
+				}
+				else{
+					view.setGameList(newstate.getGameobjects());
+				}
+				
 				
 			}
 		};
@@ -124,7 +131,7 @@ public class RTS implements EntryPoint {
 			}
 		};
 		
-		updateTimer.scheduleRepeating(300);
+		updateTimer.scheduleRepeating(1100);
 		
 	}
 	public void setOwnerID(int id){
@@ -146,8 +153,17 @@ public class RTS implements EntryPoint {
 			public void onSuccess(GameState result) {
 				//GWT.log("Success");
 				GameState newstate =(GameState) result;
-				view.setGameList(newstate.getGameobjects());
-				state = result;
+				
+				if(result == null){
+					GWT.log("the gamestate was not updated");
+				}
+				else{
+					view.setGameList(newstate.getGameobjects());
+				}
+				
+				if (state != null) {
+					state = result;
+				}
 				
 			}
 		};
