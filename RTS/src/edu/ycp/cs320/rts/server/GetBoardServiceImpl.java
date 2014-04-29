@@ -9,15 +9,19 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 import edu.ycp.cs320.rts.client.GetBoardService;
 import edu.ycp.cs320.rts.server.control.AddChangesToGameState;
+import edu.ycp.cs320.rts.server.control.AddUser;
 import edu.ycp.cs320.rts.server.control.ClientChannel;
 import edu.ycp.cs320.rts.server.control.GameStateManager;
 import edu.ycp.cs320.rts.server.control.GetGamestate;
 import edu.ycp.cs320.rts.server.control.SetGameState;
+import edu.ycp.cs320.rts.server.control.VerifyLogin;
 import edu.ycp.cs320.rts.shared.BuildRequest;
 import edu.ycp.cs320.rts.shared.GameState;
 import edu.ycp.cs320.rts.shared.Point;
 import edu.ycp.cs320.rts.shared.Structure;
-
+import edu.ycp.cs320.server.persist.Database;
+import edu.ycp.cs320.rts.shared.UserData;
+import edu.ycp.cs320.server.persist.BCrypt;
 @SuppressWarnings("serial")
 public class GetBoardServiceImpl extends RemoteServiceServlet implements GetBoardService {
 	
@@ -44,6 +48,11 @@ public class GetBoardServiceImpl extends RemoteServiceServlet implements GetBoar
 			channel = manage.connect();
 			getThreadLocalRequest().setAttribute("clientChannel", channel);
 				
+		}
+		
+		String username = (String)getThreadLocalRequest().getSession().getAttribute("username");
+		if(username == null){
+			//this should return null when login features are complete 
 		}
 		GetGamestate controller = new GetGamestate();
 		//state = controller.getGameState();
@@ -78,12 +87,19 @@ public class GetBoardServiceImpl extends RemoteServiceServlet implements GetBoar
 	}
 
 	public Boolean login(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
+		VerifyLogin logi = new VerifyLogin();
+		String user = logi.verifyLogin(username, password);
+		if(user == null){
+			return false;
+			
+		}
+		getThreadLocalRequest().setAttribute("username", user);
+		return true;
 	}
 
 	public Boolean newuser(String username, String password, String email) {
-		// TODO Auto-generated method stub
-		return null;
+		AddUser createuser = new AddUser();
+		UserData user = new UserData(username, email, BCrypt.hashpw(password, BCrypt.gensalt()));
+		return createuser.addUser(user);
 	}
 }
