@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import edu.ycp.cs320.rts.shared.UserData;
@@ -33,7 +34,36 @@ public class DerbyDatabase implements IDatabase {
 	 */
 	@Override
 	public boolean createUser(UserData user) {
-		// 
+		
+		PreparedStatement createUser = null;
+		try {
+			// Set up connection 
+			Connection conn = DriverManager.getConnection("jdbc:derby:userdata.db;create=true");
+			// Prepare insert statement and execute
+			createUser = conn.prepareStatement("insert into userdata values (?, ?, ?)");
+			createUser.setString(1, user.getUsername());
+			createUser.setString(2, user.getEmail());
+			createUser.setString(3, user.getPasswordhash());
+			createUser.addBatch();
+			createUser.executeBatch();
+			
+			return true;
+		}
+		catch (SQLException se) {
+		
+		}
+		finally {	// close the prepared statement
+			if (createUser != null) {
+				try {
+					createUser.close();
+				} catch (SQLException e) {
+					// ignore
+				}
+			}
+		}
+		
+		
+		
 		return false;
 	}
 
@@ -42,7 +72,53 @@ public class DerbyDatabase implements IDatabase {
 	 */
 	@Override
 	public String Validatelogin(String username, String password) {
-		// TODO Auto-generated method stub
+		PreparedStatement stmt = null;
+		ResultSet resultSet = null;
+		
+		try {
+			// Set up connection 
+			Connection conn = DriverManager.getConnection("jdbc:derby:userdata.db;create=true");
+			// Prepare select statement that gets the password hash stored in the database for the given username
+			stmt = conn.prepareStatement(
+					" select username, password " +
+					" from userdata " +
+					" where userdata.username = ?"		
+			);
+			stmt.setString(1, username);
+			
+			resultSet = stmt.executeQuery();
+			// Compare the password in the database to the password input by user for given username
+			while (resultSet.next()) {
+				String password_hash = resultSet.getString(2);
+				
+				boolean check = BCrypt.checkpw(password, password_hash);
+				if (check) {
+					return resultSet.getString(1);
+				}
+			}
+			return username;
+		}
+		catch (SQLException se) {
+			se.printStackTrace();
+		}
+		finally {	
+			if (stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					// ignore
+				}
+			}
+			if (resultSet != null) {
+				try {
+					resultSet.close();
+				} catch (SQLException e) {
+					// ignore
+				}
+			}
+		}
+			
+			
 		return null;
 	}
 	
@@ -59,8 +135,7 @@ public class DerbyDatabase implements IDatabase {
 			// 2. Execute a query to create userdata table
 			stmt = conn.prepareStatement(
 					" create table userdata (" +
-					" 	id integer primary key," +
-					"	username varchar(20)," +
+					"	username varchar(20) primary key," +
 					"	email varchar(20)," +
 					"	password varchar(20)" +
 					")");
