@@ -125,5 +125,6 @@
 			<attribute name="javadoc_location" value="file:/Applications/eclipse_gwt/plugins/com.google.appengine.eclipse.sdkbundle_1.9.1/appengine-java-sdk-1.9.1/docs/javadoc/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/CS320_Derby"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>
