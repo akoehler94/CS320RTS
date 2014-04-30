@@ -14,9 +14,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
-import edu.ycp.cs320.rts.server.control.AddUser;
-import edu.ycp.cs320.rts.shared.UserData;
-import edu.ycp.cs320.rts.shared.GameState;
+
 
 public class Loginscreen implements EntryPoint {
 
@@ -34,9 +32,12 @@ public class Loginscreen implements EntryPoint {
 
 			@Override
 			public void onSuccess(Boolean result) {
+				
 				if(result){
 					GWT.log("Action returned true");
 					
+				}else{
+					GWT.log("Dang, user not created");
 				}
 				
 			}
@@ -117,7 +118,7 @@ public class Loginscreen implements EntryPoint {
 			@Override
 			public void onClick(ClickEvent event) {
 				
-				;
+				Window.alert("Clicked");
 				if(pword1.getText().toString().equals(pword2.getText().toString())){
 					boardservice.newuser(usertext.getText().toString(), pword1.getText().toString(), email.getText().toString(), callbackcreate);
 				}
