@@ -50,7 +50,7 @@ public class DerbyDatabase implements IDatabase {
 			return true;
 		}
 		catch (SQLException se) {
-		
+			se.printStackTrace();
 		}
 		finally {	// close the prepared statement
 			if (createUser != null) {
@@ -135,9 +135,9 @@ public class DerbyDatabase implements IDatabase {
 			// 2. Execute a query to create userdata table
 			stmt = conn.prepareStatement(
 					" create table userdata (" +
-					"	username varchar(20) primary key," +
-					"	email varchar(20)," +
-					"	password varchar(20)" +
+					"	username varchar(100) primary key," +
+					"	email varchar(100)," +
+					"	password varchar(100)" +
 					")");
 			stmt.executeUpdate();
 			System.out.println("Created table in given database...");
