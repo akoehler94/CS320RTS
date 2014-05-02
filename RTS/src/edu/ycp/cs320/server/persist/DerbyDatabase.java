@@ -38,7 +38,8 @@ public class DerbyDatabase implements IDatabase {
 		PreparedStatement createUser = null;
 		try {
 			// Set up connection 
-			Connection conn = DriverManager.getConnection("jdbc:derby:userdata.db;create=true");
+			//you need the full path to db to work
+			Connection conn = DriverManager.getConnection("jdbc:derby:/Users/dan/Documents/cs320workspace/CS320RTS/RTS/userdata.db;create=true");
 			// Prepare insert statement and execute
 			createUser = conn.prepareStatement("insert into userdata values (?, ?, ?)");
 			createUser.setString(1, user.getUsername());
@@ -76,8 +77,10 @@ public class DerbyDatabase implements IDatabase {
 		ResultSet resultSet = null;
 		
 		try {
+			
 			// Set up connection 
-			Connection conn = DriverManager.getConnection("jdbc:derby:userdata.db;create=true");
+			//you need the full path to get the db to work correctly
+			Connection conn = DriverManager.getConnection("jdbc:derby:/Users/dan/Documents/cs320workspace/CS320RTS/RTS/userdata.db;create=true");
 			// Prepare select statement that gets the password hash stored in the database for the given username
 			stmt = conn.prepareStatement(
 					" select username, password " +
@@ -93,10 +96,11 @@ public class DerbyDatabase implements IDatabase {
 				
 				boolean check = BCrypt.checkpw(password, password_hash);
 				if (check) {
+					
 					return resultSet.getString(1);
 				}
 			}
-			return username;
+			return null;
 		}
 		catch (SQLException se) {
 			se.printStackTrace();
