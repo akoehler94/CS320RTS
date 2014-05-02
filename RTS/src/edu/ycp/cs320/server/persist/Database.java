@@ -6,7 +6,7 @@ package edu.ycp.cs320.server.persist;
  *
  */
 public class Database {
-private static final IDatabase theInstance = new DerbyDatabase();
+private static final IDatabase theInstance = new FakeDatabase();
 	
 	/**
 	 * Get the singleton {@link IDatabase} implementation.

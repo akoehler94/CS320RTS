@@ -35,27 +35,18 @@ public class GameState implements IsSerializable, Cloneable{
 	}
 	
 	public GameState(GameState s){
-//		this.gameobjects = (ArrayList<GameObject>) s.getGameobjects().clone();
-//		this.resources = new TreeMap<String, Integer>();
-//		for(String k: s.getResources().keySet()){
-//			this.resources.put(k, s.getResources().get(k));
-//		}
-//		this.buildRequests = (ArrayList<BuildRequest>) s.getBuildRequests().clone();
-//		this.attackRequests = (ArrayList<AttackRequest>) s.getAttackRequests().clone();
-		this();
-		this.gameobjects.addAll(s.gameobjects);
-		this.resources.putAll(s.resources);
-		this.moveRequests.addAll(s.moveRequests);
-		this.buildRequests.addAll(s.buildRequests);
-		this.attackRequests.addAll(s.attackRequests);
+		this.gameobjects = (ArrayList<GameObject>) s.getGameobjects().clone();
+		this.resources = new TreeMap<String, Integer>();
+		for(String k: s.getResources().keySet()){
+			this.resources.put(k, s.getResources().get(k));
+		}
+		this.buildRequests = (ArrayList<BuildRequest>) s.getBuildRequests().clone();
+		this.attackRequests = (ArrayList<AttackRequest>) s.getAttackRequests().clone();
 	}
 	
 	public GameState(){
 		setGameobjects(new ArrayList<GameObject>());
 		setResources(new TreeMap<String, Integer>());
-		buildRequests = new ArrayList<BuildRequest>();
-		moveRequests = new ArrayList<MoveRequest>();
-		attackRequests =  new ArrayList<AttackRequest>();
 	}
 
 	/**

@@ -3,7 +3,6 @@ package edu.ycp.cs320.rts.server.control;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.ycp.cs320.rts.server.SharedGamestate;
 import edu.ycp.cs320.rts.shared.BuildRequest;
 import edu.ycp.cs320.rts.shared.GameState;
 import edu.ycp.cs320.rts.shared.Request;
@@ -14,7 +13,7 @@ import edu.ycp.cs320.rts.shared.Request;
  * distribute a new state to each client.
  */
 public class GameStateManager {
-	public static final int UPDATE_INTERVAL_MS =  100; // update shared game state approximately every 100ms 
+	public static final int UPDATE_INTERVAL_MS = 100; // update shared game state approximately every 100ms 
 
 	/**
 	 * Worker thread.  Periodically checks for proposed updates,
@@ -39,23 +38,18 @@ public class GameStateManager {
 							}
 						}
 						
-						// adds proposed changes to gamestate
-						AddChangesToGameState changer = new AddChangesToGameState();
-						for(GameState s: proposedUpdates){
-							//changer.addChangesToGameState(s);
+						// TODO: incorporate proposed updates into shared game state
+						for(GameState gs: proposedUpdates){
+							gs.getAttackRequests();
+							gs.getBuildRequests();
+							gs.getMoveRequests();
+							gs.getResources();
+							
 						}
-						
-						//TODO: handle change conflicts
-						
-						//TODO: turn changes requests into changes
-						
-						
 						// Distribute new shared game state to clients
 						for (ClientChannel channel : channelList) {
 							GameState copy = sharedGameState.clone();
-							
 							channel.postUpdate(copy);
-							System.out.println("copy posted");
 						}
 					}
 				} catch (InterruptedException e) {

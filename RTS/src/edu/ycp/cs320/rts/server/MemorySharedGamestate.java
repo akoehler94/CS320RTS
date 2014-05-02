@@ -37,7 +37,6 @@ public class MemorySharedGamestate implements ISharedGamestate{
 	public void addRequests(GameState usergamestate) {
 		sharedgamestate.addBuildRequests(usergamestate.getBuildRequests());
 		sharedgamestate.addMoveRequests(usergamestate.getMoveRequests());
-		sharedgamestate.addAttackRequests(usergamestate.getAttackRequests());
 	}
 	
 }
